@@ -1,0 +1,461 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage[T1]{fontenc}
+\usepackage[document]{ragged2e} % keep all left
+
+\usepackage{pmboxdraw} %verbatim utf8
+
+\usepackage{minted} % yaml syntax highlighting
+
+\newenvironment{markdown}%
+    {\VerbatimEnvironment\begin{VerbatimOut}{tmp.markdown}}%
+    {\end{VerbatimOut}%
+        \immediate\write18{pandoc tmp.markdown -t latex -o tmp.tex}%
+        \input{tmp.tex}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\newcommand*{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}} }
+
+\title{{\Huge \textbf{Wprowadzenie do {SQLa}}}}
+%\author{Wojciech Barczynski}
+\date{}
+
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+\tableofcontents
+\pagebreak
+\section{Uruchomienie bazy danych mysql}
+
+Będziemy dzisiaj pracować na bazie danych mysql.
+
+\subsection{Weryfikacja konfiguracji}
+
+Sprawdźmy czy klient mamy właściwie działającego dockera (co to jest \emph{docker}
+powiemy więcej na zajęciach o {\small CI}/{\small CD}):
+
+\begin{minted}{bash}
+$ sudo docker ps
+\end{minted}
+
+\subsection{Start}
+Uruchommy bazę danych, przeklej poniższą komendę:
+
+\begin{minted}{bash}
+$ sudo docker run --name wsb-mysql \
+   -e MYSQL_ROOT_PASSWORD=nomoresecret \
+   -p 3306:3306 \
+   -d mysql:8
+
+# zweryfikuj czy dziala?
+$ sudo docker ps
+\end{minted}
+
+Zauważ:
+\begin{itemize}
+\item zatrzymujemy bazę danych: \mintinline{bash}{docker stop wsb-mysql}
+\item startujemy: \mintinline{bash}{docker start wsb-mysql}.
+\end{itemize}
+
+\subsection{Nawiązanie połączenia - {\small CLI}}
+W pierwszej kolejności poznajmy klienta linii komend. Pierwszym krokiem jest
+instalacja odpowiedniego pakietu:
+
+\begin{minted}{bash}
+$ sudo apt-get update
+$ sudo apt install -y mysql-client
+\end{minted}
+
+Teraz nawiążmy połączenie:
+
+\begin{minted}{bash}
+# podaj hasło: nomoresecret
+$  mysql -u root -h 127.0.0.1 -p
+\end{minted}
+
+I uruchommy pierwszą komendę mysqla: \mintinline{sql}{show databases;}:
+
+\begin{minted}{text}
+mysql> show databases;
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)
+\end{minted}
+
+\subsection{Nawiązanie połączenia - {\small GUI}}
+W dniu dzisiejszym skorzystamy z mysql-workbench\footnote{Dobrym wyborem byłby rówież \href{https://sequelpro.com/download}{sequelpro.com}}:
+
+\begin{minted}{bash}
+$ sudo apt update
+$ sudo apt install mysql-workbench
+\end{minted}
+
+Po kilku minutach instalacji:
+
+\begin{minted}{bash}
+$ mysql-workbench &
+\end{minted}
+
+Teraz kliknij na \emph{Local Instance 3306} (użytkownik \emph{root}). Po nawiązaniu połączenia wykonaj po kolei następujące komendy:
+
+
+\begin{itemize}
+\item \mintinline{sql}{show databases;}
+\item \mintinline{sql}{use mysql;}
+\item \mintinline{sql}{show tables;}
+\item \mintinline{sql}{select * from user;}
+\end{itemize}
+
+Jacy użytkownicy są utworzeni w naszej bazie?
+\bigskip
+\bigskip
+\bigskip
+
+Zauważ: praca na użytkowniku \textbf{root} jest niebezpieczna. Powinienes utworzyć osobnego użytkownika z dostępem tylko do baz danych wymaganych do pracy Twojej czy aplikacji.
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Utworzenie bazy danych}
+
+Skorzystamy z bazy danych używanych przez w3schools \footnote{Dobry tutorial znajdziesz również na \href{https://www.w3schools.com/sql/default.asp}{w3schools.com/sql}}.
+
+\bigskip
+
+1. Sciągnij \emph{w3schools.sql} z \emph{https://github.com/AndrejPHP/w3schools-database} (wyświetl zawartość pliku, potem wybierz Raw) używając \emph{wget}:
+
+\begin{minted}{bash}
+$ wget https://.. długi URL
+$ ls
+
+w3schools.sql}
+\end{minted}
+
+\bigskip 
+2. Załaduj bazę danych:
+
+\begin{minted}{bash}
+# podaj hasło: nomoresecret
+$  mysql -u root -h 127.0.0.1 -p
+
+mysql> 
+mysql> source w3schools.sql;
+
+# zobaczmy czy wszystko OK
+mysql> use w3schools;
+mysql> show tables;
+
+mysql> SELECT CustomerName,City FROM customers;
+\end{minted}
+
+Zauważ rezultat będzie podobny do\\ 
+\href{https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_columns}{https://www.w3schools.com/sql/trysql.asp?filename=trysql\_select\_columns} .
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Ćwiczenia}
+Według wskazówek wykładowcy.
+
+\begin{enumerate}
+ \item \verb|select|;
+ \item \verb|select| i \verb|where|;
+ \item \verb|count|;
+ \item \verb|select| i \verb|join|;
+ \item \verb|group| i \verb|order|;
+ \item \verb|delete| i \verb|insert|.
+\end{enumerate}
+
+Notatki:
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+% Jeśli nie, są 3 opcje:
+
+% \begin{itemize}
+% \item modyfikujemy bezpośrednio w pliku \mintinline{bash}{$HOME/.gitconfig},
+% \item dodajemy konfigurację \mintinline{bash}{.git/config} per repozytorium,
+% \item Używamy komend \mintinline{bash}{git config} jak poniżej.
+% \end{itemize}
+
+% \begin{minted}{bash}
+
+% # sprawdz konfiguracje (male L):
+% $ git config -l
+% $ git config --global user.name "wojciech11"
+
+% # nie lubimy spamerow:
+% $ git config --global user.email "wojciech11@users.noreply.github.com"
+% \end{minted}
+
+% \subsection{Przykładowe Repozytorium}
+
+% Przygotujmy repozytorium na którym będziemy wykonywać ćwiczenia.
+
+% \bigskip
+% 0. Utwórz folder o nazwie takiej jak nazwa Twojego użytkownika GIT.
+
+% \bigskip
+% 1. Utwórz repozytorium o nazwie \mintinline{text}{nauka_gita_2}
+
+% \bigskip
+% 2. Utwórz plik README.md i dodaj go do repozytorium git:
+
+% \smallskip
+% \begin{minted}[frame=single]{text}
+% # Testy platforma automatyzacji procesów finansowych z ML
+
+% ## Spec
+
+% ## Referencje
+
+% \end{minted}
+
+% \bigskip
+% 2. Wypisz na ekran zawartość \mintinline{bash}{.git/config}
+
+% \bigskip
+% 3. Utwórz repozytorium na githubie i ustaw \textit{git remote} dla naszego repozytorium.
+
+% \bigskip
+% 4. Co się zmieniło w \mintinline{bash}{.git/config}?
+
+% \bigskip
+% 5. Korzystając z \href{https://guides.github.com/features/mastering-markdown/}{https://guides.github.com/features/mastering-markdown/} zmodyfikuj plik README dwukrotknie. Za każdym razem wykonaj $push$ do githuba.
+
+% \pagebreak
+% \section{git branch}
+
+% Branche służą do pracy na różnych wersjach naszego kodu równolegle, najlepszą praktyką są krótko żyjące branche. Najczęstsze przypadki użycia:
+% \begin{itemize}%
+% \item praca równoległa nad jednym projektem,%
+% \item ekspertymenty,%
+% \item długo żyjące branche na oznaczenie środowisk deweloperskich: $prod$ i $dev$.%
+% \end{itemize}%
+
+
+% \bigskip
+% 1. Utwórz branch \mintinline{text}{add_TODO_to_README}
+
+% \begin{minted}{bash}
+% $ git checkout -b add_TODO_to_README
+% # zauważ:
+% $ git branch
+% $ git branch --remote
+% \end{minted}
+
+% $git\ branch$ pozwala nam szybko sprawdzić gdzie jesteśmy.
+
+% \bigskip
+% 2. Komendą do zmiany branch to też $checkout$. Wykonaj następujące komendy:
+
+% \begin{minted}{bash}
+% $ git checkout master
+% $ git branch
+% $ git checkout add_TODO_to_README
+% $ git branch
+% \end{minted}
+
+% \bigskip
+% 3. Na nowym branchu, w trzech commitach dodaj tekst do sekcji \mintinline{text}{TODO}.
+
+% \bigskip
+% 4. Wykorzystując $gitk$ i $gitg$, zobacz jak wygląda nasze repozytorium.
+
+% \bigskip
+% 5. Korzystając z komendy $checkout$, wyświetl zawartość pliku README na branchu $master$.
+
+% \bigskip
+% 6. Wróć na branch \mintinline{text}{add_TODO_to_README} i umieść zmiany na githubie za pomocą komendy \mintinline{bash}{git push}.
+
+% \bigskip
+% 7. Zweryfikuj, że możesz zobaczyć nowy branch na githubie
+
+% \bigskip
+% 8. Jeśli jesteś zadowolony ze stanu nowej sekcji, umieść zmiany na $master$ z pomocą komendy \mintinline{bash}{git merge}:
+
+% \begin{minted}{bash}
+% # wracamy na branch master
+% $ git checkout master
+% $ git branch
+% # domyslnie merge-ujemy zmiany na branch
+% # na ktorym jestesmy
+% $ git merge add_TODO_to_README
+% $ git push
+% \end{minted}
+
+% \section{Pull requests na githubie}
+% Praca oparta na Pull Requestach \verb|PR| jest standardem zarówno na githubie, jak i gitlabie (\href{https://gitlab.com}{gitlab.com}) czy bitbuckecie (\href{https://bitbucket.com}{bitbucket.com}).
+
+% \bigskip
+
+% 1. Utwórz branch \mintinline{text}{add_SMOKE_TEST_to_README}, dodaj sekcję \mintinline{text}{## Smoke tests}, w dwóch commitach dodaj treść do nowej sekcji.
+
+% \bigskip
+% 2. Zweryfikuj:
+
+% \begin{minted}{bash}
+% # czy wszystko dodalismy?
+% $ git status
+% # czy mamy 2 commity
+% $ git log
+% # oraz graficznie
+% $ gitk
+% \end{minted}
+
+% \bigskip
+% 3. Umieść brancha \mintinline{text}{add_SMOKE_TEST_to_README} na githubie.
+
+% \bigskip
+% 4. Poczekaj na prowadzącego. Miejsce na notatki:
+% \bigskip
+% \bigskip
+% \bigskip
+
+% 5. Zaktualizujmy nasze lokalne repozytorium:
+
+% \begin{minted}{bash}
+% $ git pull
+% # jak jest roznica:
+% $ git pull --rebase
+% \end{minted}
+
+% %%
+% \pagebreak
+% \section{Cofnięcie ostatnich zmian}
+
+% Po dodaniu nowej sekcji "Dokumentacja", dochodzimy do wniosku, że jedenak nie jest ona nam potrzebna. Z pomocą komendy \mintinline{bash}{git checkout} możemy anulować zmiany.
+
+% \bigskip
+% 1. Dodaj sekcję "Dokumentacja"
+
+% \bigskip
+% 2. Sprawdź status pliku README, powinien być \textit{modified}.
+
+% \bigskip
+% 3. Analujmy ostatnie zmiany:
+
+% \begin{minted}{bash}
+% # Czy modified?
+% $ git status
+% # wrocmy do niezmodyfikowanej wersji
+% $ git checkout README.md
+% \end{minted}
+
+% Zauważ: mamy również komendę \mintinline{bash}{git stash}, gdzie możemy odłożyć zmiany do późniejszej pracy poza repozytorium gita.
+
+% %%
+% \section{Confnięcie się do wersji}
+
+% Ćwiczenie z prowadzącym.
+
+% %%
+% \section{Git tag}
+
+% \begin{minted}{bash}
+% $ git tag -a v1.0.0 -m "Testy dla wersji 1.0.0 platformy"
+% # pojedynczy tag:
+% git push tag v1.0.0
+% # wszystkie tagi
+% $ git push --tags
+% \end{minted}
+
+% %%
+% \pagebreak
+% \section{Rozwiązywanie konfliktów}
+
+% W tym ćwiczeniu zobaczymy jak pracować z konfliktami w repozytorium git. Proszę pamiętać, że najlepszą metodą na unikanie konfliktów są krótko żyjące branche.
+
+% \bigskip
+% 1. Utwórzmy branch \mintinline{text}{add_EXTERN_DOCS_to_README}, dodaj sekcję \mintinline{text}{## Extern Docs}, commit i push.
+
+% \bigskip
+% 2. Dodaj parę linii kodu z poziomu edytowa na stronie github.com do nowej sekcji w naszym pliku README i zapisz.
+
+% \bigskip
+% 3. Lokalnie, również zmodyfikuj sekcję, zrób commit.
+
+% \bigskip
+% 4. Wykonaj \mintinline{text}{git pull}, co się stanie?
+
+% \bigskip
+% 5. Za wskazówkami wykładowcy, rozwiąż konflikt, oraz ostateczne umieść na githubie.
+
+% \bigskip
+% 6. Używając PR albo \mintinline{text}{git merge} umieść zmiany na branchu \mintinline{text}{master}.
+
+% %%
+% \section{Git workflows}
+
+% Znajdź używając google-a, czym charakteryzują się następujące konwencje użycia gita:
+
+% \begin{itemize}%
+% \item GitFlow%
+% \bigskip
+% \bigskip
+% \bigskip
+
+% \item Github Flow%
+% \bigskip
+% \bigskip
+% \bigskip
+% \end{itemize}%
+
+% Zastanów się i odpowiedź na pytania:
+
+% \begin{itemize}%
+
+% \item Jaki wpływ workflow ma na sposób budowy oprogramowania?
+% \bigskip
+% \bigskip
+% \bigskip
+
+% \item Jakie są zalety i wady GitFlow?
+% \bigskip
+% \bigskip
+% \bigskip
+
+% \item Jakie są zalety i wady Github Flow?
+% \bigskip
+% \bigskip
+% \bigskip
+
+% \item Ciekawostka. Jak wygląda rozwój Linux kernel?
+% \bigskip
+% \bigskip
+% \bigskip
+
+% \end{itemize}%
+
+% \section{Podsumowanie}
+
+% Na samym początku, jeśli mamy jakiekolwiek wątpliwości co robimy:
+
+% \begin{itemize}%
+% \item Skopiuj zawartość całego folderu jako backup.
+% \item Przed większymi operacjami na danych branchu utwórz dodatkowy.
+% \item Nie bój się używać środowiska graficznego: gitk, gitg czy sourcetree.
+% \item Unikaj \mintinline{text}{--force}
+% \end{itemize}%
+
+\begin{markdown}
+\end{markdown}
+
+\end{document}
