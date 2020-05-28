@@ -1,0 +1,59 @@
+# Short Description of the training
+
+Please provide me some information:
+
+# Audience: xxx people
+# Language: polish? english?
+# Knowledge Level of the audience: beginners?
+# Duration of the lessons: 60-minutes? 4-hours? 1-day?	
+# Where will the classes take place: online? some business space?
+
+Introduction:
+
+    1. As a first Python environment and interpreter I would suggest to use https://repl.it/. 
+       Python version 3.8
+
+       We could prepare some commented code first to facilitate learning for our audience 
+
+       I like a movies so as a presentation what is Python and what we can do with this language I
+       would write some basic web scrapper (selenium) and show our students some effective
+       show.
+
+       There is no other way to learn programming than by programming itself, so we should choose
+       some very easy Python project to realize, but it depends of the duration of the lessons so
+       please provide me some feedback about this topic.
+       
+       The project in repl.it should consist some commented code to go step by step with our users
+       and show them how python works for example:
+
+Basics:
+
+    1. Introduction to variables 
+    2. Basic mathematical operations
+
+    Excercise ....
+    3. Basic text operations
+
+    Excercise ....
+
+    More theory...
+
+    4. Fundamental Data Types:
+
+	* Int
+	* Float
+	* Bool
+	* Str
+	* List
+	* Tuple
+	* Dict
+	* Set
+	* None
+
+	Examples
+	
+    5. First coding challange 
+
+	Task ....
+	How its done ....
+
