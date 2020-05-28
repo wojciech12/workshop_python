@@ -15,8 +15,8 @@ Introduction:
 
        We could prepare some commented code first to facilitate learning for our audience 
 
-       I like a movies so as a presentation what is Python and what we can do with this language I
-       would write some basic web scrapper (selenium) and show our students some effective
+       I like movies so as a presentation what Pythoni is and what we can do with this language I
+       would write some basic web scrapper (Selenium) and show our students some effective
        show.
 
        There is no other way to learn programming than by programming itself, so we should choose
@@ -24,7 +24,7 @@ Introduction:
        please provide me some feedback about this topic.
        
        The project in repl.it should consist some commented code to go step by step with our users
-       and show them how python works for example:
+       and show them how Python works, for example:
 
 Basics:
 
@@ -50,10 +50,10 @@ Basics:
 	* Set
 	* None
 
-	Examples
+	Examples ...
 	
     5. First coding challange 
 
-	Task ....
-	How its done ....
+	Task ...
+	How it's done ...
 
