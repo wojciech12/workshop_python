@@ -11,6 +11,7 @@ Przypomnienie koncepcji, proszę przed zajęciami zrobić (speed run) (Nauka Pod
 5. Słowniki
 6. Łańcuchy znaków
 7. Praca z bibliotekami i środowiskiem (hermetycznym) wirutalnym
+8. Wykorzystanie lintera (flake8) w nauce pythona
 
 ## dzień 2,... - podstawy 2
 
@@ -22,6 +23,8 @@ Zrobimy skok wprzód i popracujemy na gotowych aplikacjach, abyśmy mogli zobacz
 4. Umieszczenie kodu na githubie/gitlabie z pomocą gita
 
 ## dzień 3 - podstawy 3
+
+TBA
 
 1. Obiekty i klasy
 2. Exceptions

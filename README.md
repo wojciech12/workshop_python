@@ -38,7 +38,7 @@ Proszę zweryfikować swoje środowisko:
    print("Hello Natalia!")
    ```
 
-   W konsoli lub terminalu uruchom:
+2. W konsoli lub terminalu uruchom:
 
    ```
    $ python main.py
@@ -85,9 +85,13 @@ $ pip install requests
 3. Testowanie aplikacji Python
 4. Python i testowanie BDD z Behave aplikacji typu REST
 5. [Python i bazy SQL](03_sql/main.pdf)
-6. Django
-7. notebook jupyter i ML
-8. Python i Docker - tylko na Linuxie
-9. Python, Docker i Kubernetes
-10. Python i Selenium
-11. Automatyzacja zasobów chmurowych z Ansible
+6. notebook jupyter i ML
+7. Python i Docker - tylko na Linuxie
+8. Python, Docker i Kubernetes
+9. Python i Selenium
+10. Automatyzacja zasobów chmurowych z Ansible
+11. Continuous Integration/Deployment dla Pythona z travisCi
+
+## Referencje
+
+- https://www.coursera.org/learn/learning-how-to-learn
