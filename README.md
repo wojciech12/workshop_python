@@ -81,8 +81,13 @@ $ pip install requests
 ## Szkolenia
 
 1. [Podstawy 1,2,3](01_podstawy/)
-2. aplikacje webowe z flask - TBA
-3. TBA
-4. [Python i bazy SQL](03_sql/main.pdf)
-5. django
-6. notebook jupyter i ML
+2. Aplikacje webowe z flask - TBA
+3. Testowanie aplikacji Python
+4. Python i testowanie BDD z Behave aplikacji typu REST
+5. [Python i bazy SQL](03_sql/main.pdf)
+6. Django
+7. notebook jupyter i ML
+8. Python i Docker - tylko na Linuxie
+9. Python, Docker i Kubernetes
+10. Python i Selenium
+11. Automatyzacja zasobów chmurowych z Ansible
