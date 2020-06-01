@@ -41,7 +41,7 @@ Proszę zweryfikować swoje środowisko:
 2. W konsoli lub terminalu uruchom:
 
    ```
-   $ python main.py
+   $ python3 main.py
    # powinnaś/powinieneś zobaczyć:
    Hello Natalia
    ```
