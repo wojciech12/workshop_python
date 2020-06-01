@@ -13,8 +13,9 @@ Proszę przed przyjściem na warsztaty upewnić się, że Twój laptop jest przy
 
    Zainstalowanie VirtualBox jest bardzo proste i jest dużo tutoriali online, które pokazują jak to zrobić.
 
-2. Python3
-
+2. Python3.8  
+Link: https://www.python.org/downloads/
+<!--  Warto podac wersje Pythona, roznia sie skladnia , sugeruje wersje 3.8 poniewaz jest ona najnowsza stabilna wersj mozliwa do sciagniecia z oficjalnej strony Python.ort-->
 3. Edytor:
 
    - [atom](https://atom.io)
@@ -39,9 +40,9 @@ Proszę zweryfikować swoje środowisko:
    ```
 
 2. W konsoli lub terminalu uruchom:
-
+<!--  Z uwagi, ze na to ze na komputerze moze byc zainstalowana wersja Pythona zarowno 2 jak i 3 Czasami trzeba uruchomic kod poprzez komende python3, o tym nalezaloby wspomniec takze podczas szkolenia. W tym momencie weryfikujemy czy jest zainstalowana wersja Python 3-->
    ```
-   $ python main.py
+   $ python3 main.py
    # powinnaś/powinieneś zobaczyć:
    Hello Natalia
    ```
