@@ -139,13 +139,7 @@ lista = ['Ania','Basia','Celina', 'Dorota']
 
 assert (lista[0] == 'Ania')  # True
 
-# Slice
-print(lista[:4])  # prints from beginning to end index
-print(lista[2:])  # prints from start index to end of list
-print(lista[2:4]) # prints from start index to end index
-print(lista[:])   # prints from beginning to end of list
-
-assert test == 'Dorota'
+assert lista[-1] == 'Dorota'
 
 lista.append('Ewelina')  # ['Ania', 'Basia', 'Celina', 'Dorota', 'Ewelina']
 lista.remove('Basia')  # ['Ania', 'Celina', 'Dorota', 'Ewelina']
@@ -159,3 +153,27 @@ lista[1] = "Gosia"
 
 print(len(lista))  # ilosc elementow w liscie
 
+# Operacje na listach
+# lista ['Ania', 'Gosia', 'Dorota','Ewelina']
+
+print(lista[:3])  # ['Ania', 'Gosia', 'Dorota'] 
+print(lista[2:])  # ['Dorota', 'Ewelina']
+print(lista[3:4])  # ['Ewelina']
+print(lista[:])   # ['Ania', 'Gosia', 'Dorota', 'Ewelina'] 
+
+# 4. Petla
+
+# Objekt musi byc iteracyjny
+
+# Petla for 
+
+# range
+for numer in range(10):
+    print(numer)
+
+# ale moze byc tez slowo
+for litera in 'ABCDEFGHIJL':
+    print(numer)
+
+for element in lista:
+    print(element)
