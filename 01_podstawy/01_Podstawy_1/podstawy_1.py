@@ -6,6 +6,7 @@
 
 print("Hello Natalia!")
 
+
 # Funkcja print(....) powoduje wyświetlenie zdania w terminalu.
 
 # Czy chciałabyś zmienić imię?
@@ -175,5 +176,135 @@ for numer in range(10):
 for litera in 'ABCDEFGHIJL':
     print(numer)
 
+# Wazna uwaga - indentacja <- wciecia
+
 for element in lista:
     print(element)
+
+a = 0
+
+# Petla while
+while a < 10:
+    print(a)
+    a+=1
+else:
+    print("Koniec petli")
+
+# 4. Funkcje
+
+# Funkcje nalezy zadeklarowac od slowa def, funkcja przyjmuje parametry i moze (ale nie musi) zwracac wynik
+
+# Funkcja zwraca wynik dodawania (return)
+
+def add(a, b):
+    return a + b
+
+test = add(2, 8)  # =10
+
+print(test)
+
+# Funkcja nie zwracajaca zadnego wyniku ale wykonujaca dzialanie
+
+def print_hello(parametr):
+    print("Hello " + str(parametr))
+
+print_hello("Natalia!")
+
+# 5. Slowniki (dictionaries), key-value pair
+
+# Typowy slownik
+
+dictionary = {
+    "key_1": "value_1",
+    "key_2": "value_2",
+    "key_3": "value_3",
+    "key_n": "value_n"
+}
+
+# Bardziej rozbudowany slownik moze opisywac dowolny obiekt.
+# Slownik moze zawierac takze listy, slowniki, liczby, slowa
+
+# Nauczymy sie korzystac ze slownikow na bazie przykladu 
+# Idziemy na zakupy!
+
+# Najpierw wezmiemy torebke, opiszmy zatem jej podstawowe cechy...
+
+torebka = {
+    "kolor": "czarny",
+    "zawartosc": ["telefon", "kluczyki", "klucze do domu"]
+}
+
+portfel = {
+        "kolor": "czerwony",
+        "ilosc pieniedzy": 150,
+    }
+
+# Cwiczenie - "wlozmy" portfel do torebki. 
+
+torebka['portfel'] = portfel
+
+print(torebka)
+
+# Cwiczenie- zaszalejmy na zakupach!
+# W celach utrwalenia poprzednich lekcji napiszemy specjalna funkcje do robienia wirtualnych zakupow w sklepie
+
+def zaplac_za_zakupy(obiekt, zakup, wartosc_zakupu):
+    ilosc_pieniedzy = obiekt['portfel']['ilosc pieniedzy']
+    ilosc_pieniedzy -= wartosc_zakupu
+
+    if ilosc_pieniedzy >= 0:
+        obiekt['zawartosc'].append(zakup)
+        obiekt['portfel']['ilosc pieniedzy'] = ilosc_pieniedzy
+        return obiekt 
+    else:
+        print("Niewystarczajaca ilosc pieniedzy")
+        return obiekt 
+
+
+torebka = zaplac_za_zakupy(torebka,'szminka', 50) 
+torebka = zaplac_za_zakupy(torebka,'perfumy', 50) 
+torebka = zaplac_za_zakupy(torebka,'tusz do rzes', 50) 
+
+print(torebka)
+
+torebka = zaplac_za_zakupy(torebka,'kolczyki', 50) 
+
+#6. Praca z bibliotekami
+
+# Mozemy zaimportowac zewnetrzne biblioteki do usprawniania pracy w jezyku Python
+
+# Powiedzmy, ze nasza torebka nie byla zbyt przejrzysta
+# W celu poprawienia przejrzystosci uzyjemy zewnetrznej biblioteki pprint
+
+import pprint  # deklarujemy za pomoca import
+pprint.pprint(torebka)
+
+from pprint import pprint as p # mozemy tez zaimportowac czesc biblioteki i nadac jej alias - w tym przypadku p
+
+p(torebka)
+
+# Niektore biblioteki nie sa dostepne bezposrednio w programie i nalezy je importowac z sieci poprzez manager instalacji bibliotek python 
+
+# https://pypi.org/project/pip/
+
+# zainstalujemy biblioteke do czytania plikow PDF
+# w tym celu otworzymy okno terminala
+
+# pip3 install textract
+
+# Mozesz zapoznac sie z dokumentacja na stronie projektu
+
+# https://textract.readthedocs.io/en/stable/
+
+import textract
+
+text = textract.process('/Users/bt/Documents/GitHub/workshop_python/01_podstawy/01_Podstawy_1/plik.pdf')
+
+# Uzyjemy poprzedniej biblioteki pprint
+p(text)
+
+# Srodowisko hermetyczne venv
+
+# pip3 install virtualenv;
+# virtualenv --python=/usr/local/bin/python3 .venv;
+# source .venv/bin/activate;
